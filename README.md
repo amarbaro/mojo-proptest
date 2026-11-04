@@ -48,3 +48,5 @@ Requires Mojo 1.2.
 `Int` overflow on add (`4611686018427387904`), UTF-8 cut mid-codepoint (`"é"`), index of an empty list (`[]`), NaN compare (`nan`).
 Also: negatives shrink (`-101`), a correct property passes 10,000 cases (about 55 ms for 30,000 cases in all), the same seed gives
 the same case. `scripts/selfcheck.sh` applies 10 mutants (6 to the library, 4 that fix a planted bug) and the gate must fail on each.
+
+API: [docs/api.md](docs/api.md). Design: [docs/design.md](docs/design.md).
