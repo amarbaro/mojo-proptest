@@ -1,6 +1,6 @@
 [project]
 name = "mojo-proptest"
-version = "0.1.0"
+version = "0.1.1"
 description = "Property tests for Mojo: seeded generators, shrinking, a failure that names the seed and the minimal case"
 license = "Apache-2.0"
 requires-python = ">=3.11,<3.15"
