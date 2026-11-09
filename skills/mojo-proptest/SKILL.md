@@ -7,7 +7,7 @@ metadata:
 
 # mojo-proptest
 
-One file, `src/proptest/__init__.mojo`, Mojo 1.2, no dependencies.
+One file, `src/mproptest/__init__.mojo`, Mojo 1.2, no dependencies.
 
 ## When to use
 
@@ -16,12 +16,12 @@ The same seed gives the same cases, so a failure replays.
 
 ## Install
 
-`mojo run -I src app.mojo` from a clone, or copy `src/proptest/`.
+`mojo run -I src app.mojo` from a clone, or copy `src/mproptest/`.
 
 ## The calls
 
 ```mojo
-from proptest import check, Ints, Lists, Strings, Floats, Byte, OneOf
+from mproptest import check, Ints, Lists, Strings, Floats, Byte, OneOf
 
 def clamp(x: Int) -> Int:
     return min(x, 100)   # bug: no lower bound
@@ -39,7 +39,7 @@ def main() raises:
     try:
         check(Ints(-1000, 1000), in_range)                 # check(gen, prop, n=500, seed=1)
     except e:
-        print(e)   # proptest: falsified at case 0 (seed=1); minimal: -101
+        print(e)   # mproptest: falsified at case 0 (seed=1); minimal: -101
     try:
         check(Lists(Ints(-1000, 1000)), no_big_sums, seed=5)
     except e:
@@ -49,7 +49,7 @@ def main() raises:
 ## Gotchas
 
 - `check` takes the generator **first**: Mojo cannot infer the property's argument type from the property alone.
-- A property returns `False` or raises to fail; `check` then shrinks and raises `proptest: falsified at case N (seed=S); minimal: ...`.
+- A property returns `False` or raises to fail; `check` then shrinks and raises `mproptest: falsified at case N (seed=S); minimal: ...`.
   Let it propagate in a test, or catch it as above.
 - One argument per property. For several, use `Lists` or a generator of your own that builds a struct.
 - Generators: `Ints(lo, hi)`, `Floats()` (a quarter are 0.0, -0.0, ±1, ±inf, nan), `Byte()`, `Strings(max_len, pool)`,

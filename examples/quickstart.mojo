@@ -1,4 +1,4 @@
-from proptest import check, Ints, Lists
+from mproptest import check, Ints, Lists
 
 
 def clamp(x: Int) -> Int:
@@ -13,7 +13,7 @@ def main() raises:
     try:
         check(Lists(Ints(-1000, 1000)), no_big_sums, seed=5)
     except e:
-        print(e)   # proptest: falsified at case 1 (seed=5); minimal: [206, 794]
+        print(e)   # mproptest: falsified at case 1 (seed=5); minimal: [206, 794]
     try:
         check(Ints(-1000, 1000), in_range)
     except e:

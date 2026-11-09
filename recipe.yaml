@@ -13,7 +13,7 @@ source:
 build:
   number: 0
   script:
-    - mojo precompile src/proptest -o ${{ PREFIX }}/lib/mojo/proptest.mojoc
+    - mojo precompile src/mproptest -o ${{ PREFIX }}/lib/mojo/mproptest.mojoc
 
 requirements:
   host:

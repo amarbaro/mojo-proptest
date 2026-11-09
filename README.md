@@ -5,11 +5,11 @@
 <!-- /badges -->
 
 <!-- install -->
-Install: `pixi workspace channel add https://conda.modular.com/max https://prefix.dev/amarbaro/amarbaro`, then `pixi add mojo-proptest` (import `proptest`). From source: `git clone https://github.com/amarbaro/mojo-proptest`, then `mojo run -I mojo-proptest/src app.mojo`.
+Install: `pixi workspace channel add https://conda.modular.com/max https://prefix.dev/amarbaro/amarbaro`, then `pixi add mojo-proptest` (import `mproptest`, so it can be installed beside [bpr/proptest](https://github.com/bpr/proptest), whose import is `proptest`). From source: `git clone https://github.com/amarbaro/mojo-proptest`, then `mojo run -I mojo-proptest/src app.mojo`.
 Toolchains: Mojo 1.2 stable, and the nightly 1.3.0.dev2026110805 in the weekly [mojo-libs](https://github.com/amarbaro/mojo-libs) matrix (36 libraries on stable, 35 on nightly).
 
 ```mojo
-from proptest import check, Ints, Lists
+from mproptest import check, Ints, Lists
 
 
 def clamp(x: Int) -> Int:
@@ -22,12 +22,12 @@ def in_range(x: Int) raises -> Bool:
 
 def main() raises:
     check(Ints(-1000, 1000), in_range)
-    # proptest: falsified at case 0 (seed=1); minimal: -101
+    # mproptest: falsified at case 0 (seed=1); minimal: -101
 ```
 
 | Call | Does |
 |---|---|
-| `check[G: Gen](g, prop, n=500, seed=1)` | Runs `prop` on `n` generated values; raises `proptest: falsified at case <i> (seed=<seed>); minimal: <value>`. |
+| `check[G: Gen](g, prop, n=500, seed=1)` | Runs `prop` on `n` generated values; raises `mproptest: falsified at case <i> (seed=<seed>); minimal: <value>`. |
 | `Ints(lo, hi)`, `Byte()`, `Floats()` | Integers, bytes, floats (special values a quarter of the time). |
 | `OneOf[V](items)`, `Lists[G](elem, max_len=16)`, `Strings(max_len=8, pool=...)` | An item of a list, lists of a generator, UTF-8 strings. |
 | `trait Gen` | Your own generator: generate from an `Rng`, list simpler candidates. |

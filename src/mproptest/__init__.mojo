@@ -146,4 +146,4 @@ def check[G: Gen](g: G, prop: def(G.T) thin raises -> Bool, n: Int = 500, seed: 
                     v = c.copy()
                     moved = True
                     break
-        raise Error("proptest: falsified at case ", i, " (seed=", seed, "); minimal: ", g.show(v))
+        raise Error("mproptest: falsified at case ", i, " (seed=", seed, "); minimal: ", g.show(v))

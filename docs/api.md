@@ -1,6 +1,6 @@
 # API
 
-Everything is in `proptest` (`src/proptest/__init__.mojo`).
+Everything is in `mproptest` (`src/mproptest/__init__.mojo`).
 
 ## `check`
 
@@ -9,7 +9,7 @@ Everything is in `proptest` (`src/proptest/__init__.mojo`).
 Runs `prop` on `n` values from `g`. Case `i` of a seed always gets the same value. A case fails
 when `prop` returns `False` or raises. The first failing case is shrunk (at most 10,000 shrink
 candidates tried), then `check` raises
-`proptest: falsified at case <i> (seed=<seed>); minimal: <value>`. All cases passing returns.
+`mproptest: falsified at case <i> (seed=<seed>); minimal: <value>`. All cases passing returns.
 
 `prop` takes one argument. For several, use `Lists` or write a generator that builds a struct.
 

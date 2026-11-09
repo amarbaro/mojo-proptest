@@ -1,7 +1,7 @@
 # The gate's oracle: five planted bugs, each with a known minimal input, plus a correct property and determinism.
 from std.testing import assert_equal, assert_true
 from std.math import nan
-from proptest import check, Rng, Gen, Ints, Floats, Lists, Strings, Byte, OneOf
+from mproptest import check, Rng, Gen, Ints, Floats, Lists, Strings, Byte, OneOf
 
 
 def found[G: Gen](g: G, prop: def(G.T) thin raises -> Bool, want: String, seed: Int = 1) raises -> String:

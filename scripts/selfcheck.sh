@@ -3,7 +3,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ROOT=$PWD
-L=src/proptest/__init__.mojo; T=tests/planted.mojo
+L=src/mproptest/__init__.mojo; T=tests/planted.mojo
 mutants=(
   "$L|        while d != 0:|        while False:|Ints shrinks only to its target"
   "$L|        self.s = UInt64(seed) ^ (UInt64(idx + 1) * 0x9E3779B97F4A7C15)|        self.s = UInt64(seed)|every case starts from the same state"
