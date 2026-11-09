@@ -5,7 +5,8 @@
 <!-- /badges -->
 
 <!-- install -->
-Install: `pixi add mojo-proptest` once published. For now: `git clone https://github.com/amarbaro/mojo-proptest`, then `mojo run -I mojo-proptest/src app.mojo`.
+Install: `pixi workspace channel add https://conda.modular.com/max https://prefix.dev/amarbaro/amarbaro`, then `pixi add mojo-proptest` (import `proptest`). From source: `git clone https://github.com/amarbaro/mojo-proptest`, then `mojo run -I mojo-proptest/src app.mojo`.
+Toolchains: Mojo 1.2 stable, and the nightly 1.3.0.dev2026110805 in the weekly [mojo-libs](https://github.com/amarbaro/mojo-libs) matrix (36 libraries on stable, 35 on nightly).
 
 ```mojo
 from proptest import check, Ints, Lists
@@ -23,6 +24,13 @@ def main() raises:
     check(Ints(-1000, 1000), in_range)
     # proptest: falsified at case 0 (seed=1); minimal: -101
 ```
+
+| Call | Does |
+|---|---|
+| `check[G: Gen](g, prop, n=500, seed=1)` | Runs `prop` on `n` generated values; raises `proptest: falsified at case <i> (seed=<seed>); minimal: <value>`. |
+| `Ints(lo, hi)`, `Byte()`, `Floats()` | Integers, bytes, floats (special values a quarter of the time). |
+| `OneOf[V](items)`, `Lists[G](elem, max_len=16)`, `Strings(max_len=8, pool=...)` | An item of a list, lists of a generator, UTF-8 strings. |
+| `trait Gen` | Your own generator: generate from an `Rng`, list simpler candidates. |
 <!-- /install -->
 
 Property tests for Mojo in 149 lines: seeded generators, shrinking, and a failure that names the seed and the
@@ -41,6 +49,8 @@ Requires Mojo 1.2.
 - Your own generator: conform to `Gen` (`T`, `gen`, `shrink`; `show` is optional).
 - `check` takes the generator first: Mojo cannot infer the property's argument type from the property alone.
 - One argument per property. Several: build a `Lists` or write a generator that makes a struct.
+
+**Limits:** No integrated shrinking, test database or stateful testing. Shrinking is greedy and stops after 10,000 candidates with the best value found. A property is a `thin` function, so it captures nothing.
 
 ## Checked
 
