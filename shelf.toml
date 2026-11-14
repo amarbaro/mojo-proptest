@@ -1,0 +1,4 @@
+name = "mojo-proptest"
+version = "0.2.0"
+description = "Property tests for Mojo: seeded generators, shrinking, a failure that names the seed and the minimal case"
+tags = ["mojo", "testing", "property-test"]
